@@ -1,3 +1,4 @@
+package objetos;
 public class Produto {
 
     private String nome;
@@ -11,6 +12,8 @@ public class Produto {
         this.preco = preco;
         this.quantidade = quantidade;
     }
+    public Produto(){}
+    
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
