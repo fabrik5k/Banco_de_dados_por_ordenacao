@@ -1,4 +1,3 @@
-package objetos;
 public class Produto {
 
     private String nome;

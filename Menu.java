@@ -1,19 +1,26 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import objetos.Produto;
 
 public class Menu {
     
     public static void main(String[] args) {
+        //Traçando chaves no alfabeto para converter em numeros
+        char[] alfabeto = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        HashMap<Character, Integer> alfabeto_para_numero = new HashMap<Character, Integer>();
+        for (int i = 0; i < alfabeto.length; i++) {
+            alfabeto_para_numero.put(alfabeto[i], i);
+        }
+
         List<Produto> listaProdutos = new ArrayList<>();
+        Produto produto1 = new Produto("Jarro", "Muito fragil", 14.38f, 3);     listaProdutos.add(produto1);
+        Produto produto2 = new Produto("Vidro", "Muito fragil", 12.38f, 1);     listaProdutos.add(produto2);
+        Produto produto3 = new Produto("Garrafa", "Muito fragil", 18.38f, 8);   listaProdutos.add(produto3);
         Scanner scan = new Scanner(System.in);
-
-        //Object[] listaTemporaria = listaProdutos.toArray(); | Usar depois |
-
+        
         while (true) {
             System.out.println("##########");
             System.out.println("*  Menu  *");
@@ -23,8 +30,6 @@ public class Menu {
             System.out.println("4 - Buscar Produto");
             System.out.println("##########");
             System.out.print("R: ");
-            Collections.sort(null, null);
-            System.out.println("");
 
             switch (scan.nextInt()) {
                 case 1:
@@ -39,7 +44,7 @@ public class Menu {
 
                     System.out.println("Preço do Produto: ");
                     produtoAtual.setPreco(scan.nextFloat());
-                    
+
                     System.out.println("Quantidade do produto: ");
                     produtoAtual.setQuantidade(scan.nextInt());
 
@@ -47,7 +52,14 @@ public class Menu {
                     break;
                 
                 case 2:
-                    
+                    System.out.println();
+                    System.out.println("Digite o nome do produto que voce deseja remover: ");
+                    String nomeProduto = scan.next();
+                    for (int i = 0; i < nomeProduto.length(); i++) {
+                        if () {
+                            
+                        }
+                    }
                     break;
 
                 case 3:
