@@ -39,5 +39,8 @@ public class Produto {
     public int getQuantidade() {
         return quantidade;
     }
+    public int compareTo(Produto produto) {
+        return 0;
+    }
     
 }

@@ -3,14 +3,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class BinarySearchExample {
-    public static int binarySearch(List<String> sortedList, String searchKey) {
+public class BinarySearch {
+    public static int binarySearch(List<Produto> sortedList, String searchKey) {
         int left = 0;
         int right = sortedList.size() - 1;
 
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            int comparison = searchKey.compareTo(sortedList.get(mid));
+            int comparison = searchKey.compareTo(sortedList.get(mid).getNome());
 
             if (comparison == 0) {
                 return mid; // Encontrou o elemento
@@ -25,12 +25,14 @@ public class BinarySearchExample {
     }
 
     public static void main(String[] args) {
-        List<String> sortedList = new ArrayList<>(Arrays.asList("apple", "banana", "cherry", "grape", "orange"));
+        List<Produto> sortedList = new ArrayList<>();
+        Produto produto1 = new Produto("Agua", "Muito fragil", 14.38f, 3);     sortedList.add(produto1);
+        Produto produto2 = new Produto("Bola", "Muito fragil", 12.38f, 1);     sortedList.add(produto2);
+        Produto produto3 = new Produto("Carro", "Muito fragil", 18.38f, 8);   sortedList.add(produto3);
 
         // Ordenar a lista (caso ela não esteja ordenada)
-        Collections.sort(sortedList);
 
-        String searchKey = "cherry";
+        String searchKey = "Carro";
         int index = binarySearch(sortedList, searchKey);
 
         if (index >= 0) {

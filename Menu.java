@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +19,9 @@ public class Menu {
         Produto produto2 = new Produto("Vidro", "Muito fragil", 12.38f, 1);     listaProdutos.add(produto2);
         Produto produto3 = new Produto("Garrafa", "Muito fragil", 18.38f, 8);   listaProdutos.add(produto3);
         Scanner scan = new Scanner(System.in);
+        HeapSortAlfabetico.heapSort(listaProdutos);
+        String nomeProduto;
+        int index;
         
         while (true) {
             System.out.println("##########");
@@ -49,31 +51,111 @@ public class Menu {
                     produtoAtual.setQuantidade(scan.nextInt());
 
                     System.out.println("##########");
+                    listaProdutos.add(produtoAtual);
+                    HeapSortAlfabetico.heapSort(listaProdutos);
+
                     break;
                 
                 case 2:
                     System.out.println();
                     System.out.println("Digite o nome do produto que voce deseja remover: ");
-                    String nomeProduto = scan.next();
-                    for (int i = 0; i < nomeProduto.length(); i++) {
-                        if () {
-                            
-                        }
-                    }
+                    nomeProduto = scan.next();
+                    listaProdutos.remove(BinarySearch.binarySearch(listaProdutos, nomeProduto));
                     break;
 
                 case 3:
+                    System.out.println();
+                    System.out.println("Digite o nome do produto que voce deseja atualizar: ");
+                    nomeProduto = scan.next();
+                    index = BinarySearch.binarySearch(listaProdutos, nomeProduto);
+                    System.out.println("##########");
+
+                    System.out.println("Nome do Produto: ");
+                    listaProdutos.get(index).setNome(scan.next());
+
+                    System.out.println("Descrição do Produto: ");
+                    listaProdutos.get(index).setDescricao(scan.nextLine());
+
+                    System.out.println("Preço do Produto: ");
+                    listaProdutos.get(index).setPreco(scan.nextFloat());
+
+                    System.out.println("Quantidade do produto: ");
+                    listaProdutos.get(index).setQuantidade(scan.nextInt());
+
+                    System.out.println("##########");
+                    HeapSortAlfabetico.heapSort(listaProdutos);
                     
                     break;
 
                 case 4:
+                    System.out.println();
+                    System.out.println("Buscar por nome: ");
+                    nomeProduto = scan.next();
+                    index = BinarySearch.binarySearch(listaProdutos, nomeProduto);
+                    System.out.println("##########");
+
+                    System.out.println("Nome do Produto: ");
+                    listaProdutos.get(index).getNome();
+
+                    System.out.println("Descrição do Produto: ");
+                    listaProdutos.get(index).getDescricao();
+
+                    System.out.println("Preço do Produto: ");
+                    listaProdutos.get(index).getPreco();
+
+                    System.out.println("Quantidade do produto: ");
+                    listaProdutos.get(index).getQuantidade();
+
+                    System.out.println("##########");
+                    break;
+
+                case 5:
+                    System.out.println("");
+                    System.out.println("Escolha como deseja visualizar");
+                    System.out.println("1 - Preço");
+                    System.out.println("2 - Ordem Alfabética");
+                    switch (scan.nextInt()) {
+                        case 1:
+                            
+                            break;
+
+                        case 2:
+                            System.out.println("Escolha a ordem: ");
+                            System.out.println("1 - Crescente");
+                            System.out.println("2 - Decrescente");
+                            switch (scan.nextInt()) {
+                                case 1:
+                                    System.out.println("Produtos: ");
+                                    for (int i = 0; i < listaProdutos.size(); i++) {
+                                        System.out.println("| Nome:" + listaProdutos.get(i).getNome() + "| Preço: " + listaProdutos.get(i).getPreco() + "| Quantidade: " + listaProdutos.get(i).getQuantidade() + "|");
+                                        System.out.println("Descrição: " + listaProdutos.get(i).getDescricao());
+                                        System.out.println("");
+                                    }
+                                    break;
+
+                                case 2:
+                                    for (int i = listaProdutos.size(); i > 0; i--) {
+                                        System.out.println("| Nome:" + listaProdutos.get(i).getNome() + "| Preço: " + listaProdutos.get(i).getPreco() + "| Quantidade: " + listaProdutos.get(i).getQuantidade() + "|");
+                                        System.out.println("Descrição: " + listaProdutos.get(i).getDescricao());
+                                        System.out.println("");
+                                    }
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
+                            break;
                     
+                        default:
+                            break;
+                    }
                     break;
             
                 default:
                     System.out.println("Coloque uma opção válida!!");
                     break;
             }
+            scan.close();
         }
     }
 
