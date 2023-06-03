@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,13 +6,6 @@ import java.util.Scanner;
 public class Menu {
     
     public static void main(String[] args) {
-        //Traçando chaves no alfabeto para converter em numeros
-        char[] alfabeto = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-        HashMap<Character, Integer> alfabeto_para_numero = new HashMap<Character, Integer>();
-        for (int i = 0; i < alfabeto.length; i++) {
-            alfabeto_para_numero.put(alfabeto[i], i);
-        }
-
         List<Produto> listaProdutos = new ArrayList<>();
         Produto produto1 = new Produto("Jarro", "Muito fragil", 14.38f, 3);     listaProdutos.add(produto1);
         Produto produto2 = new Produto("Vidro", "Muito fragil", 12.38f, 1);     listaProdutos.add(produto2);
@@ -30,8 +22,10 @@ public class Menu {
             System.out.println("2 - Remover Produto");
             System.out.println("3 - Atualizar");
             System.out.println("4 - Buscar Produto");
+            System.out.println("5 - Visualizar Produtos");
             System.out.println("##########");
             System.out.print("R: ");
+            HeapSort.sort(listaProdutos);
 
             switch (scan.nextInt()) {
                 case 1:
@@ -60,7 +54,11 @@ public class Menu {
                     System.out.println();
                     System.out.println("Digite o nome do produto que voce deseja remover: ");
                     nomeProduto = scan.next();
-                    listaProdutos.remove(BinarySearch.binarySearch(listaProdutos, nomeProduto));
+                    if (BinarySearch.binarySearch(listaProdutos, nomeProduto) != 1) {
+                        listaProdutos.remove(BinarySearch.binarySearch(listaProdutos, nomeProduto));
+                    } else {
+                        System.out.println("Produto não encontrado !!!");
+                    }
                     break;
 
                 case 3:
@@ -68,22 +66,26 @@ public class Menu {
                     System.out.println("Digite o nome do produto que voce deseja atualizar: ");
                     nomeProduto = scan.next();
                     index = BinarySearch.binarySearch(listaProdutos, nomeProduto);
-                    System.out.println("##########");
-
-                    System.out.println("Nome do Produto: ");
-                    listaProdutos.get(index).setNome(scan.next());
-
-                    System.out.println("Descrição do Produto: ");
-                    listaProdutos.get(index).setDescricao(scan.nextLine());
-
-                    System.out.println("Preço do Produto: ");
-                    listaProdutos.get(index).setPreco(scan.nextFloat());
-
-                    System.out.println("Quantidade do produto: ");
-                    listaProdutos.get(index).setQuantidade(scan.nextInt());
-
-                    System.out.println("##########");
-                    HeapSortAlfabetico.heapSort(listaProdutos);
+                    if (index != -1) {
+                        System.out.println("##########");
+    
+                        System.out.println("Nome do Produto: ");
+                        listaProdutos.get(index).setNome(scan.next());
+    
+                        System.out.println("Descrição do Produto: ");
+                        listaProdutos.get(index).setDescricao(scan.nextLine());
+    
+                        System.out.println("Preço do Produto: ");
+                        listaProdutos.get(index).setPreco(scan.nextFloat());
+    
+                        System.out.println("Quantidade do produto: ");
+                        listaProdutos.get(index).setQuantidade(scan.nextInt());
+    
+                        System.out.println("##########");
+                        HeapSortAlfabetico.heapSort(listaProdutos);
+                    } else {
+                        System.out.println("Produto não encontrado !!!");
+                    }
                     
                     break;
 
@@ -92,21 +94,25 @@ public class Menu {
                     System.out.println("Buscar por nome: ");
                     nomeProduto = scan.next();
                     index = BinarySearch.binarySearch(listaProdutos, nomeProduto);
-                    System.out.println("##########");
-
-                    System.out.println("Nome do Produto: ");
-                    listaProdutos.get(index).getNome();
-
-                    System.out.println("Descrição do Produto: ");
-                    listaProdutos.get(index).getDescricao();
-
-                    System.out.println("Preço do Produto: ");
-                    listaProdutos.get(index).getPreco();
-
-                    System.out.println("Quantidade do produto: ");
-                    listaProdutos.get(index).getQuantidade();
-
-                    System.out.println("##########");
+                    if (index != -1) {
+                        System.out.println("##########");
+    
+                        System.out.println("Nome do Produto: ");
+                        listaProdutos.get(index).getNome();
+    
+                        System.out.println("Descrição do Produto: ");
+                        listaProdutos.get(index).getDescricao();
+    
+                        System.out.println("Preço do Produto: ");
+                        listaProdutos.get(index).getPreco();
+    
+                        System.out.println("Quantidade do produto: ");
+                        listaProdutos.get(index).getQuantidade();
+    
+                        System.out.println("##########");
+                    } else {
+                        System.out.println("Produto não encontrado !!!");
+                    }
                     break;
 
                 case 5:
@@ -116,10 +122,7 @@ public class Menu {
                     System.out.println("2 - Ordem Alfabética");
                     switch (scan.nextInt()) {
                         case 1:
-                            
-                            break;
-
-                        case 2:
+                            HeapSort.sort(listaProdutos);
                             System.out.println("Escolha a ordem: ");
                             System.out.println("1 - Crescente");
                             System.out.println("2 - Decrescente");
@@ -129,6 +132,35 @@ public class Menu {
                                     for (int i = 0; i < listaProdutos.size(); i++) {
                                         System.out.println("| Nome:" + listaProdutos.get(i).getNome() + "| Preço: " + listaProdutos.get(i).getPreco() + "| Quantidade: " + listaProdutos.get(i).getQuantidade() + "|");
                                         System.out.println("Descrição: " + listaProdutos.get(i).getDescricao());
+                                        System.out.println("");
+                                    }
+                                    break;
+
+                                case 2:
+                                    for (int i = listaProdutos.size(); i > 0; i--) {
+                                        System.out.println("| Nome:" + listaProdutos.get(i).getNome() + "| Preço: " + listaProdutos.get(i).getPreco() + "| Quantidade: " + listaProdutos.get(i).getQuantidade() + "|");
+                                        System.out.println("Descrição: " + listaProdutos.get(i).getDescricao());
+                                        System.out.println("");
+                                    }
+                                    break;
+                            
+                            
+                                default:
+                                    break;
+                            }
+                            break;
+
+                        case 2:
+                            HeapSortAlfabetico.heapSort(listaProdutos);
+                            System.out.println("Escolha a ordem: ");
+                            System.out.println("1 - Crescente");
+                            System.out.println("2 - Decrescente");
+                            switch (scan.nextInt()) {
+                                case 1:
+                                    System.out.println("Produtos: ");
+                                    for (int i = 0; i < listaProdutos.size(); i++) {
+                                        System.out.println("| Nome:" + listaProdutos.get(i).getNome() + "| Preço: " + listaProdutos.get(i).getPreco() + "| Quantidade: " + listaProdutos.get(i).getQuantidade() + "|");
+                                        System.out.println("| Descrição: " + listaProdutos.get(i).getDescricao());
                                         System.out.println("");
                                     }
                                     break;
@@ -155,7 +187,6 @@ public class Menu {
                     System.out.println("Coloque uma opção válida!!");
                     break;
             }
-            scan.close();
         }
     }
 

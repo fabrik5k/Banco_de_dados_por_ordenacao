@@ -1,26 +1,6 @@
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class HeapSortAlfabetico {
-    public static void main(String[] args) {
-        List<Produto> list = new ArrayList<>();
-        Produto produto1 = new Produto("Barro", "Muito fragil", 14.38f, 3);     list.add(produto1);
-        Produto produto2 = new Produto("Cidro", "Muito fragil", 12.38f, 1);     list.add(produto2);
-        Produto produto3 = new Produto("Aarrafa", "Muito fragil", 18.38f, 8);   list.add(produto3);
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("Lista antes da ordenação: " + list.get(i).getNome());
-        }
-
-        heapSort(list);
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("Lista antes da ordenação: " + list.get(i).getNome());
-        }
-    }
-
     public static void heapSort(List<Produto> list) {
         int n = list.size();
 
